@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  php:
+    tty: true # Enables debugging capabilities when attached to this container.
+    image: 'adept23/php-fpm-pinba:7.3'
+    ports:
+      - 9000:9000
+    volumes:
+      - ./config/pinba/pinba.ini:/etc/php/7.3/mods-available/pinba.ini
