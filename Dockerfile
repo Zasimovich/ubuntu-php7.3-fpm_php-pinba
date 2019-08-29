@@ -33,6 +33,10 @@ RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.3/fpm/pool.d/
 #     ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY ./supervisord.conf /etc/supervisor/supervisord.conf
+COPY ./pinba.ini /etc/php/7.3/mods-available/pinba.ini
 
-#CMD ["php7.3-fpm", "-F"]
-CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisor/supervisord.conf"]
+#CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisor/supervisord.conf"]
+#or
+RUN mkdir -p /run/php #решение проблемы -> ERROR: Unable to create the PID file (/run/php/php7.3-fpm.pid).: No such file or directory (2)
+
+CMD ["php-fpm7.3", "-F"]
