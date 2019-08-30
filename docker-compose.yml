@@ -4,6 +4,9 @@ services:
   php:
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'adept23/php-fpm-pinba:7.3'
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: php-fpm-pinba
     ports:
       - 9000:9000
